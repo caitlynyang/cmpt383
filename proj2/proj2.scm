@@ -35,3 +35,14 @@
 		)
 	)
 )
+
+(define get-first-pair
+	(lambda (key lst)
+		(cond
+			((equal? '() lst) '())
+			((or (not (list? lst)) (not (is-pair? (car lst)))) "lst is not an association list")
+			((equal? key (car (car lst))) (car lst))
+			(else (get-first-pair key (cdr lst)))
+		)
+	)
+)
