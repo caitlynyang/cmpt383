@@ -46,3 +46,14 @@
 		)
 	)
 )
+
+(define del-all-pairs
+	(lambda (key lst)
+		(cond
+			((equal? '() lst) '())
+			((or (not (list? lst)) (not (is-pair? (car lst)))) "lst is not an association list")
+			((equal? key (car (car lst))) (del-all-pairs key (cdr lst)))
+			(else (cons (car lst) (del-all-pairs key (cdr lst))))
+		)
+	)
+)
