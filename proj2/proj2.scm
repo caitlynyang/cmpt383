@@ -57,3 +57,14 @@
 		)
 	)
 )
+
+(define del-first-pair
+	(lambda (key lst)
+		(cond
+			((equal? '() lst) '())
+			((or (not (list? lst)) (not (is-pair? (car lst)))) "lst is not an association list")
+			((equal? key (car (car lst))) (cdr lst))
+			(else (cons (car lst) (del-first-pair key (cdr lst))))
+		)
+	)
+)
