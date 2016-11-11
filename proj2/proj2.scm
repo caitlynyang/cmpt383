@@ -24,3 +24,14 @@
 		)
 	)
 )
+
+(define get-all-pairs
+	(lambda (key lst)
+		(cond
+			((equal? '() lst) '())
+			((or (not (list? lst)) (not (is-pair? (car lst)))) "lst is not an association list")
+			((equal? key (car (car lst))) (cons (car lst) (get-all-pairs key (cdr lst))))
+			(else (get-all-pairs key (cdr lst)))
+		)
+	)
+)
