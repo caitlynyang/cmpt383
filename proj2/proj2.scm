@@ -87,6 +87,7 @@
                        				((equal? op '*) (* left right))
                        				((equal? op '/) (/ left right))
                        				((equal? op '**) (expt left right))
+					 	(else (error "invalid expression"))
 					)
 				)
 			)
