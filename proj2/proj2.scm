@@ -29,7 +29,7 @@
 	(lambda (key lst)
 		(cond
 			((equal? '() lst) '())
-			((or (not (list? lst)) (not (is-pair? (car lst)))) "lst is not an association list")
+			((or (not (list? lst)) (not (is-pair? (car lst)))) (error "lst is not an association list"))
 			((equal? key (car (car lst))) (cons (car lst) (get-all-pairs key (cdr lst))))
 			(else (get-all-pairs key (cdr lst)))
 		)
@@ -40,7 +40,7 @@
 	(lambda (key lst)
 		(cond
 			((equal? '() lst) '())
-			((or (not (list? lst)) (not (is-pair? (car lst)))) "lst is not an association list")
+			((or (not (list? lst)) (not (is-pair? (car lst)))) (error "lst is not an association list"))
 			((equal? key (car (car lst))) (car lst))
 			(else (get-first-pair key (cdr lst)))
 		)
@@ -51,7 +51,7 @@
 	(lambda (key lst)
 		(cond
 			((equal? '() lst) '())
-			((or (not (list? lst)) (not (is-pair? (car lst)))) "lst is not an association list")
+			((or (not (list? lst)) (not (is-pair? (car lst)))) (error "lst is not an association list"))
 			((equal? key (car (car lst))) (del-all-pairs key (cdr lst)))
 			(else (cons (car lst) (del-all-pairs key (cdr lst))))
 		)
@@ -62,7 +62,7 @@
 	(lambda (key lst)
 		(cond
 			((equal? '() lst) '())
-			((or (not (list? lst)) (not (is-pair? (car lst)))) "lst is not an association list")
+			((or (not (list? lst)) (not (is-pair? (car lst)))) (error "lst is not an association list"))
 			((equal? key (car (car lst))) (cdr lst))
 			(else (cons (car lst) (del-first-pair key (cdr lst))))
 		)
