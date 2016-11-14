@@ -71,24 +71,29 @@
 
 (define myeval
 	(lambda (expr environment)
-       		(cond
-           		((number? expr)
-               			expr)
-            		((symbol? expr)
-            			(car (cdr (get-first-pair expr environment))))
-           		(else
-				(let	((left (myeval (car expr) environment))
-                   	 		(op (car (cdr expr)))
-                   	 		(right (myeval (car (cdr (cdr expr))) environment))
-                   	 		)
-                   			(cond
-                       				((equal? op '+) (+ left right))
-                       				((equal? op '-) (- left right))
-                       				((equal? op '*) (* left right))
-                       				((equal? op '/) (/ left right))
-                       				((equal? op '**) (expt left right))
-					 	(else (error "invalid expression"))
-					)
+       	(cond
+           	((number? expr)
+               	expr)
+            ((symbol? expr)
+            	(let ((pair (get-first-pair expr environment)))
+            		(cond
+            			((equal? '() pair) (error "unknown variable"))
+            			(else (car (cdr pair)))
+            		)
+            	))
+           	(else
+				(let	((left	(myeval (car expr) environment))
+                   	 	(op		(car (cdr expr)))
+                   	 	(right	(myeval (car (cdr (cdr expr))) environment))
+                   	 	)
+                   		(cond
+                       		((equal? op '+)		(+ left right))
+                       		((equal? op '-)		(- left right))
+                       		((equal? op '*)		(* left right))
+                       		((equal? op '/)		(/ left right))
+                       		((equal? op '**)	(expt left right))
+					 		(else				(error "invalid expression"))
+						)
 				)
 			)
 		)
