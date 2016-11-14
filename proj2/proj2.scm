@@ -68,3 +68,28 @@
 		)
 	)
 )
+
+(define myeval
+	(lambda (expr environment)
+       		(cond
+           		((number? expr)
+               			expr)
+            		((symbol? expr)
+            			(car (cdr (get-first-pair expr environment))))
+           		(else
+				(let	((left (myeval (car expr) environment))
+                   	 		(op (car (cdr expr)))
+                   	 		(right (myeval (car (cdr (cdr expr))) environment))
+                   	 		)
+                   			(cond
+                       				((equal? op '+) (+ left right))
+                       				((equal? op '-) (- left right))
+                       				((equal? op '*) (* left right))
+                       				((equal? op '/) (/ left right))
+                       				((equal? op '**) (expt left right))
+					)
+				)
+			)
+		)
+	)
+)
