@@ -1,1 +1,5 @@
-# cmpt383
+# cmpt383 coursework
+
+go
+scheme
+haskell
