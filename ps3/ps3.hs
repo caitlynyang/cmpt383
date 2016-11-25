@@ -28,7 +28,7 @@ is_bit_seq3 = all is_bit
 
 -- 4a
 invert_bits1 :: [Int] -> [Int]
-invert_bits1 []     = []
+invert_bits1 []          = []
 invert_bits1 (x:xs)
              | x == 0    = 1 : invert_bits1 xs
              | x == 1    = 0 : invert_bits1 xs
