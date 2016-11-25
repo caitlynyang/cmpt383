@@ -36,22 +36,26 @@ invert_bits1 (x:xs)
 
 -- 4b
 invert_bits2 :: [Int] -> [Int]
-invert_bits2 = map (\x -> if x == 0 then 1 else if x == 1 then 0 else x)
+invert_bits2 = map (\x -> if is_bit x then flip_bit x else x)
 
--- 4c not done
+-- 4c
 invert_bits3 :: [Int] -> [Int]
-invert_bits3 lst = new
-                   where new = [flip_bit n | n <- lst, is_bit n]
+invert_bits3 lst = new_lst
+                   where new_lst = [if is_bit n then flip_bit n else n | n <- lst]
 
 -- 5
 bit_count :: [Int] -> (Int, Int)
-bit_count lst = (length (filter (==0) lst), length (filter (==1) lst))
+bit_count lst = (length $ filter (==0) lst, length $ filter (==1) lst)
 
--- 6 not done
+-- 6
+dec_to_bit_seq :: Int -> Int -> [Int]
+dec_to_bit_seq _ 0     = []
+dec_to_bit_seq val len = dec_to_bit_seq (val `div` 2) (len - 1) ++ [rem val 2]
+
 all_bit_seqs :: Int -> [[Int]]
 all_bit_seqs n
-             | n < 1 = []
-             | otherwise = [[1]]
+             | n < 1     = []
+             | otherwise = map (\x -> dec_to_bit_seq x n) [0..2^n - 1]
 
 
 
